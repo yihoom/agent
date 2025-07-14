@@ -66,9 +66,30 @@ class Config:
             else:
                 logger.info("Configuration file not found, using defaults")
                 self.config_data = {}
+
+            # 尝试加载本地配置文件（用于敏感信息）
+            local_config_path = Path("config.local.yaml")
+            if local_config_path.exists():
+                try:
+                    with open(local_config_path, 'r', encoding='utf-8') as f:
+                        local_config = yaml.safe_load(f) or {}
+
+                    # 合并本地配置，本地配置优先级更高
+                    self._merge_config(self.config_data, local_config)
+                    logger.info(f"Loaded local configuration from {local_config_path}")
+                except Exception as e:
+                    logger.warning(f"Failed to load local configuration: {e}")
         except Exception as e:
             logger.error(f"Failed to load configuration: {e}")
             self.config_data = {}
+
+    def _merge_config(self, base_config: dict, override_config: dict) -> None:
+        """合并配置字典，override_config 的值会覆盖 base_config。"""
+        for key, value in override_config.items():
+            if key in base_config and isinstance(base_config[key], dict) and isinstance(value, dict):
+                self._merge_config(base_config[key], value)
+            else:
+                base_config[key] = value
     
     def save_config(self) -> None:
         """保存配置到文件。"""
@@ -148,17 +169,27 @@ class Config:
     
     def get_ai_config(self) -> Dict[str, Any]:
         """获取AI相关配置。"""
+        # 获取API密钥，优先级：环境变量 > 本地配置文件 > 配置文件
+        api_keys = {}
+        providers = ["openai", "anthropic", "google", "deepseek"]
+
+        for provider in providers:
+            # 1. 首先检查环境变量
+            env_key = f"{provider.upper()}_API_KEY"
+            api_key = os.getenv(env_key)
+
+            # 2. 如果环境变量没有或是示例值，检查本地配置文件
+            if not api_key or api_key.startswith("your_"):
+                api_key = self.get(f"api_keys.{provider}")
+
+            api_keys[provider] = api_key
+
         return {
             "provider": self.get("ai.default_provider", "openai"),
             "model": self.get("ai.default_model", "gpt-3.5-turbo"),
             "max_tokens": self.get("ai.max_tokens", 1000),
             "temperature": self.get("ai.temperature", 0.7),
-            "api_keys": {
-                "openai": os.getenv("OPENAI_API_KEY"),
-                "anthropic": os.getenv("ANTHROPIC_API_KEY"),
-                "google": os.getenv("GOOGLE_API_KEY"),
-                "deepseek": os.getenv("DEEPSEEK_API_KEY")
-            }
+            "api_keys": api_keys
         }
     
     def get_file_manager_config(self) -> Dict[str, Any]:

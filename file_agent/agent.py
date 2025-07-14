@@ -122,11 +122,27 @@ class FileAgent:
             file_match = re.search(r'["\']([^"\']+\.[\w]+)["\']', original_input)
             if file_match:
                 filename = file_match.group(1)
-                # 提取内容
+                # 提取内容 - 改进的内容提取逻辑
                 content = ""
+
+                # 方法1: 查找"内容是/为"模式
                 if "内容" in user_input:
                     content_match = re.search(r'内容[是为]?["\']([^"\']+)["\']', original_input)
                     content = content_match.group(1) if content_match else ""
+
+                # 方法2: 查找文件名后的内容描述
+                if not content:
+                    # 查找类似"内容是print('Hello')"的模式
+                    content_match = re.search(r'内容[是为]?\s*(.+)', original_input)
+                    if content_match:
+                        content_part = content_match.group(1).strip()
+                        # 移除引号
+                        if content_part.startswith('"') and content_part.endswith('"'):
+                            content = content_part[1:-1]
+                        elif content_part.startswith("'") and content_part.endswith("'"):
+                            content = content_part[1:-1]
+                        else:
+                            content = content_part
 
                 return {
                     "operation": "create_file",
@@ -226,7 +242,7 @@ class FileAgent:
                         "message": "AI provider not configured",
                         "operation": operation
                     }
-                
+
                 # 构建包含文件操作能力的提示
                 enhanced_prompt = f"""
 你是一个文件管理助手。用户说："{params['prompt']}"
@@ -241,22 +257,112 @@ class FileAgent:
 - 创建目录：create_directory(path)
 - 列出文件：list_files(path, pattern="*", recursive=False)
 
-请分析用户的需求，如果需要执行文件操作，请说明具体的操作步骤。如果不需要文件操作，请直接回答用户的问题。
+如果用户需要执行文件操作，请在回复的最后添加一行：
+EXECUTE: operation_name(param1, param2, ...)
+
+例如：
+- 如果要创建文件：EXECUTE: create_file("test.py", "print('Hello World')")
+- 如果要列出文件：EXECUTE: list_files(".", "*.py")
+
+请分析用户的需求并提供帮助。
 """
-                
+
                 ai_config = self.config.get_ai_config()
                 ai_response = await self.ai_provider.generate_response(
                     enhanced_prompt,
                     max_tokens=ai_config["max_tokens"],
                     temperature=ai_config["temperature"]
                 )
-                
+
+                if not ai_response["success"]:
+                    return {
+                        "success": False,
+                        "message": ai_response.get("error", "Unknown error"),
+                        "operation": operation,
+                        "ai_model": ai_response.get("model"),
+                        "usage": ai_response.get("usage")
+                    }
+
+                # 解析AI响应中的执行指令
+                response_text = ai_response.get("response", "")
+                executed_operations = []
+
+                # 查找EXECUTE指令
+                import re
+                execute_pattern = r'EXECUTE:\s*(\w+)\((.*?)\)(?:\s|$)'
+                matches = re.findall(execute_pattern, response_text, re.DOTALL)
+
+                for operation_name, params_str in matches:
+                    if operation_name in self.file_operations:
+                        try:
+                            # 更好的参数解析
+                            params_list = []
+                            if params_str.strip():
+                                # 使用eval来安全解析参数（仅限于简单的字符串和数字）
+                                try:
+                                    # 构建一个安全的参数列表
+                                    params_str = params_str.strip()
+                                    if params_str.startswith('"') and '", "' in params_str:
+                                        # 处理多个字符串参数
+                                        parts = params_str.split('", "')
+                                        params_list = [part.strip('"') for part in parts]
+                                    elif params_str.startswith('"') and params_str.endswith('"'):
+                                        # 单个字符串参数
+                                        params_list = [params_str.strip('"')]
+                                    else:
+                                        # 尝试分割逗号分隔的参数
+                                        import ast
+                                        params_list = ast.literal_eval(f"[{params_str}]")
+                                except:
+                                    # 如果解析失败，尝试简单的字符串分割
+                                    params_list = [p.strip().strip('"\'') for p in params_str.split(',')]
+
+                            # 执行操作
+                            if operation_name == "create_file" and len(params_list) >= 1:
+                                path = params_list[0]
+                                content = params_list[1] if len(params_list) > 1 else ""
+                                op_result = self.file_operations[operation_name](path, content)
+                                executed_operations.append(f"✓ {operation_name}: {op_result['message']}")
+
+                            elif operation_name == "list_files":
+                                path = params_list[0] if params_list else "."
+                                pattern = params_list[1] if len(params_list) > 1 else "*"
+                                op_result = self.file_operations[operation_name](path, pattern)
+                                executed_operations.append(f"✓ {operation_name}: Found {op_result.get('total_files', 0)} files")
+
+                            elif operation_name in ["read_file", "delete_file"] and len(params_list) >= 1:
+                                path = params_list[0]
+                                op_result = self.file_operations[operation_name](path)
+                                executed_operations.append(f"✓ {operation_name}: {op_result['message']}")
+
+                            elif operation_name in ["move_file", "copy_file"] and len(params_list) >= 2:
+                                src_path = params_list[0]
+                                dst_path = params_list[1]
+                                op_result = self.file_operations[operation_name](src_path, dst_path)
+                                executed_operations.append(f"✓ {operation_name}: {op_result['message']}")
+
+                            elif operation_name == "create_directory" and len(params_list) >= 1:
+                                path = params_list[0]
+                                op_result = self.file_operations[operation_name](path)
+                                executed_operations.append(f"✓ {operation_name}: {op_result['message']}")
+
+                        except Exception as e:
+                            executed_operations.append(f"✗ {operation_name}: Error - {str(e)}")
+
+                # 构建最终响应
+                final_message = response_text
+                if executed_operations:
+                    # 移除EXECUTE指令行
+                    final_message = re.sub(r'EXECUTE:.*?\n?', '', final_message).strip()
+                    final_message += "\n\n执行的操作：\n" + "\n".join(executed_operations)
+
                 return {
-                    "success": ai_response["success"],
-                    "message": ai_response.get("response", ai_response.get("error", "Unknown error")),
+                    "success": True,
+                    "message": final_message,
                     "operation": operation,
                     "ai_model": ai_response.get("model"),
-                    "usage": ai_response.get("usage")
+                    "usage": ai_response.get("usage"),
+                    "executed_operations": executed_operations
                 }
             
             else:

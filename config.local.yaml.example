@@ -1,0 +1,18 @@
+# 本地配置文件示例
+# 复制此文件为 config.local.yaml 并填入你的真实API密钥
+# config.local.yaml 文件会被 .gitignore 忽略
+
+api_keys:
+  openai: "your_openai_api_key_here"
+  anthropic: "your_anthropic_api_key_here" 
+  google: "your_google_api_key_here"
+  deepseek: "your_deepseek_api_key_here"
+
+# 其他本地配置
+ai:
+  default_provider: "deepseek"  # 你偏好的默认提供商
+  default_model: "deepseek-chat"
+
+file_manager:
+  default_workspace: "./workspace"
+  backup_enabled: true

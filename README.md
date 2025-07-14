@@ -39,9 +39,22 @@ pip install -e .
 ```
 
 3. **配置API密钥**：
+
+**方法1: 使用安全设置脚本（推荐）**
+```bash
+python setup_keys.py
+```
+
+**方法2: 手动配置环境变量**
 ```bash
 cp .env.example .env
 # 编辑 .env 文件，添加你的API密钥
+```
+
+**方法3: 使用本地配置文件**
+```bash
+cp config.local.yaml.example config.local.yaml
+# 编辑 config.local.yaml 文件，添加你的API密钥
 ```
 
 ## 📖 使用方法
@@ -254,6 +267,51 @@ file-agent/
 ├── .env.example        # 环境变量示例
 └── README.md           # 项目文档
 ```
+
+## 🔐 API密钥安全管理
+
+### 安全设置API密钥
+
+**推荐方法：使用安全设置脚本**
+```bash
+python setup_keys.py
+```
+
+这个脚本会：
+- 🔒 隐藏输入，保护你的密钥不被显示
+- 📁 将密钥保存到本地配置文件（不会被提交到Git）
+- 🛡️ 设置适当的文件权限
+- 🎯 帮你选择默认的AI提供商
+
+**查看当前配置状态：**
+```bash
+python setup_keys.py status
+```
+
+### 配置优先级
+
+系统按以下优先级读取API密钥：
+1. **环境变量** (最高优先级)
+2. **本地配置文件** (`config.local.yaml`)
+3. **主配置文件** (`config.yaml`)
+
+### 安全最佳实践
+
+1. **永远不要提交API密钥到版本控制**
+   - ✅ 使用 `.gitignore` 忽略 `.env` 和 `config.local.yaml`
+   - ✅ 使用 `setup_keys.py` 脚本安全设置
+
+2. **定期轮换API密钥**
+   - 🔄 定期更新你的API密钥
+   - 🗑️ 删除不再使用的旧密钥
+
+3. **限制密钥权限**
+   - 🎯 只给密钥必要的权限
+   - 💰 设置使用限额
+
+4. **监控密钥使用**
+   - 📊 定期检查API使用情况
+   - 🚨 发现异常立即撤销密钥
 
 ## 📚 学习要点
 

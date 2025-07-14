@@ -93,3 +93,59 @@
 2025-07-14 22:13:47,039 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
 2025-07-14 22:13:47,043 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '我们可以通过张量的shape属性来访问张量的形状和张'}
 2025-07-14 22:13:47,390 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:17:05,366 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:17:05,367 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:17:06,696 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:17:07,191 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:17:07,684 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:17:07,688 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '在当前目录下创建一个测试用python小程序'}
+2025-07-14 22:17:08,043 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:20:34,935 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:20:34,935 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:20:36,324 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:20:36,830 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:20:37,333 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:20:37,336 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '在当前目录下创建一个测试用python小程序'}
+2025-07-14 22:20:37,730 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:21:54,298 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:21:54,298 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:21:55,706 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:21:56,207 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:21:56,709 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:21:56,713 - file_agent.agent - INFO - Executing operation: create_file with params: {'path': 'hello.py', 'content': ''}
+2025-07-14 22:21:56,713 - file_agent.file_manager - INFO - Created file: E:\project\agent\workspace\hello.py
+2025-07-14 22:21:57,057 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:23:29,764 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:23:29,764 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:23:31,216 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:23:31,720 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:23:32,241 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:23:32,244 - file_agent.agent - INFO - Executing operation: create_file with params: {'path': 'test_hello.py', 'content': "print('Hello World')"}
+2025-07-14 22:23:32,245 - file_agent.file_manager - INFO - Created file: E:\project\agent\workspace\test_hello.py
+2025-07-14 22:23:32,611 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-14 22:23:32,611 - file_agent.ai_providers - ERROR - DeepSeek API error: Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****12be is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-07-14 22:29:26,144 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:29:26,145 - file_agent.config - INFO - Loaded local configuration from config.local.yaml
+2025-07-14 22:29:27,525 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:29:27,530 - file_agent.agent - INFO - Executing operation: create_file with params: {'path': 'secure_test.py', 'content': "print('API密钥安全测试')"}
+2025-07-14 22:29:27,530 - file_agent.file_manager - INFO - Created file: E:\project\agent\workspace\secure_test.py
+2025-07-14 22:29:27,911 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:30:52,325 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:30:52,326 - file_agent.config - INFO - Loaded local configuration from config.local.yaml
+2025-07-14 22:30:52,326 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: deepseek']
+2025-07-14 22:30:53,844 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:30:53,848 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '测试本地配置是否正常工作'}
+2025-07-14 22:30:54,239 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-14 22:30:54,240 - file_agent.ai_providers - ERROR - DeepSeek API error: Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****here is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-07-14 22:32:56,093 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:32:56,093 - file_agent.config - INFO - Loaded local configuration from config.local.yaml
+2025-07-14 22:32:57,483 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:32:57,487 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '测试本地配置是否正常工作'}
+2025-07-14 22:32:57,838 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-14 22:32:57,839 - file_agent.ai_providers - ERROR - DeepSeek API error: Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****42e0 is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-07-14 22:35:44,273 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:35:44,274 - file_agent.config - INFO - Loaded local configuration from config.local.yaml
+2025-07-14 22:35:45,634 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:35:46,619 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:35:46,623 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '你是什么模型'}
+2025-07-14 22:35:46,997 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
