@@ -1,0 +1,130 @@
+Metadata-Version: 2.4
+Name: file-agent
+Version: 0.1.0
+Summary: A file management agent with AI capabilities
+Author-email: Your Name <your.email@example.com>
+License-Expression: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: click>=8.0.0
+Requires-Dist: colorama>=0.4.4
+Requires-Dist: python-dotenv>=0.19.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: openai>=1.0.0
+Requires-Dist: anthropic>=0.7.0
+Requires-Dist: google-generativeai>=0.3.0
+Requires-Dist: pathlib2>=2.3.0
+Requires-Dist: watchdog>=2.1.0
+Requires-Dist: httpx>=0.24.0
+Requires-Dist: aiohttp>=3.8.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: flake8>=5.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=5.0.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0.0; extra == "docs"
+
+# File Agent
+
+一个集成了文件管理和AI能力的智能代理，支持主流大模型API。
+
+## 功能特性
+
+- 🗂️ **文件管理**: 支持文件的创建、读取、写入、删除、移动等操作
+- 🤖 **AI集成**: 集成OpenAI、Claude、Gemini等主流大模型API
+- 💬 **智能交互**: 通过自然语言与AI交互，执行文件操作
+- ⚙️ **配置管理**: 灵活的配置系统，支持多种AI提供商
+- 🔒 **安全性**: 安全的文件操作和API密钥管理
+- 📝 **日志记录**: 完整的操作日志和错误追踪
+
+## 安装
+
+1. 克隆项目：
+```bash
+git clone <repository-url>
+cd file-agent
+```
+
+2. 安装依赖：
+```bash
+pip install -r requirements.txt
+```
+
+3. 配置环境变量：
+```bash
+cp .env.example .env
+# 编辑 .env 文件，添加你的API密钥
+```
+
+## 使用方法
+
+### 命令行界面
+
+```bash
+# 启动交互式模式
+file-agent
+
+# 执行单个命令
+file-agent --command "创建一个名为test.txt的文件"
+
+# 指定工作目录
+file-agent --workspace ./my-workspace
+```
+
+### Python API
+
+```python
+from file_agent import FileAgent
+
+# 创建agent实例
+agent = FileAgent()
+
+# 执行文件操作
+result = agent.execute("创建一个包含当前时间的日志文件")
+print(result)
+```
+
+## 配置
+
+在 `.env` 文件中配置以下选项：
+
+- `OPENAI_API_KEY`: OpenAI API密钥
+- `ANTHROPIC_API_KEY`: Anthropic API密钥
+- `GOOGLE_API_KEY`: Google API密钥
+- `DEFAULT_AI_PROVIDER`: 默认AI提供商
+- `DEFAULT_MODEL`: 默认模型名称
+
+## 开发
+
+### 运行测试
+
+```bash
+pytest
+```
+
+### 代码格式化
+
+```bash
+black .
+```
+
+### 类型检查
+
+```bash
+mypy file_agent
+```
+
+## 许可证
+
+MIT License

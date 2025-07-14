@@ -1,0 +1,95 @@
+2025-07-14 20:55:33,446 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 20:55:34,280 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 20:55:34,281 - file_agent.agent - INFO - Executing operation: create_file with params: {'path': 'demo.txt', 'content': '这是一个演示文件'}
+2025-07-14 20:55:34,282 - file_agent.file_manager - INFO - Created file: E:\project\agent\workspace\demo.txt
+2025-07-14 20:55:39,517 - openai._base_client - INFO - Retrying request to /chat/completions in 0.445965 seconds
+2025-07-14 20:55:44,975 - openai._base_client - INFO - Retrying request to /chat/completions in 0.834329 seconds
+2025-07-14 20:55:50,822 - file_agent.ai_providers - ERROR - OpenAI API error: Request timed out.
+2025-07-14 21:51:58,449 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 21:51:58,450 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 21:51:59,303 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 21:51:59,779 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: gpt-3.5-turbo
+2025-07-14 21:51:59,781 - file_agent.agent - INFO - Executing operation: create_file with params: {'path': 'deepseek_test.txt', 'content': 'DeepSeek测试文件'}
+2025-07-14 21:51:59,782 - file_agent.file_manager - INFO - Created file: E:\project\agent\workspace\deepseek_test.txt
+2025-07-14 21:52:00,159 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-07-14 21:52:00,160 - file_agent.ai_providers - ERROR - DeepSeek API error: Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****here is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-07-14 22:00:05,263 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:00:05,264 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:00:06,060 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:00:06,535 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: gpt-3.5-turbo
+2025-07-14 22:00:06,537 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '请帮我写一个Python函数'}
+2025-07-14 22:00:06,852 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"
+2025-07-14 22:00:06,852 - file_agent.ai_providers - ERROR - DeepSeek API error: Error code: 400 - {'error': {'message': 'Model Not Exist', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}
+2025-07-14 22:02:13,748 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:02:13,748 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:02:15,191 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:02:15,709 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:02:16,238 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:02:16,242 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '请帮我写一个Python函数'}
+2025-07-14 22:02:16,586 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:02:40,522 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:02:40,522 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:02:41,851 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:02:42,329 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:02:42,819 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:02:42,822 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '请帮我写一个计算斐波那契数列的Python函数，要求包含注释'}
+2025-07-14 22:02:43,171 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:03:17,452 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:03:17,453 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:03:18,827 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:03:19,314 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:03:19,795 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:03:20,766 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-coder
+2025-07-14 22:03:20,770 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '请审查一下我的代码质量'}
+2025-07-14 22:03:21,105 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:03:53,304 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:03:53,304 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:03:54,650 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:03:55,130 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:03:55,613 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:03:55,617 - file_agent.agent - INFO - Executing operation: create_file with params: {'path': 'fibonacci.py', 'content': ''}
+2025-07-14 22:03:55,617 - file_agent.file_manager - INFO - Created file: E:\project\agent\workspace\fibonacci.py
+2025-07-14 22:03:55,974 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:07:41,161 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:07:41,161 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:07:42,534 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:07:43,045 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:07:43,560 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:07:43,563 - file_agent.agent - INFO - Executing operation: create_file with params: {'path': 'calculator.py', 'content': ''}
+2025-07-14 22:07:43,564 - file_agent.file_manager - INFO - Created file: E:\project\agent\workspace\calculator.py
+2025-07-14 22:07:43,949 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:08:20,714 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:08:20,714 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:08:22,094 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:08:22,593 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:08:23,091 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:08:23,095 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '请帮我在calculator.py文件中写入一个完整的计算器类代码'}
+2025-07-14 22:08:23,445 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:09:05,428 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:09:05,429 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:09:06,837 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:09:07,357 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:09:07,873 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:09:07,876 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '将以下代码写入calculator.py文件：class Calculator: def add(self, a, b): return a + b'}
+2025-07-14 22:09:08,233 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:11:53,176 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:11:53,176 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:11:54,498 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:11:54,985 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:11:55,487 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:11:55,490 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '请告诉我最近三个月的AI最新相关信息'}
+2025-07-14 22:11:55,847 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:12:42,973 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:12:42,973 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:12:44,317 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:12:44,817 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:12:45,304 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:12:45,307 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '你是什么模型'}
+2025-07-14 22:12:45,715 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2025-07-14 22:13:44,624 - file_agent.config - INFO - Loaded configuration from config.yaml
+2025-07-14 22:13:44,624 - file_agent.agent - WARNING - Configuration issues: ['Missing API key for provider: openai']
+2025-07-14 22:13:46,030 - file_agent.agent - INFO - Initialized AI provider: openai with model: gpt-3.5-turbo
+2025-07-14 22:13:46,536 - file_agent.agent - INFO - Switched to default model deepseek-chat for provider deepseek
+2025-07-14 22:13:47,039 - file_agent.agent - INFO - Initialized AI provider: deepseek with model: deepseek-chat
+2025-07-14 22:13:47,043 - file_agent.agent - INFO - Executing operation: ai_process with params: {'prompt': '我们可以通过张量的shape属性来访问张量的形状和张'}
+2025-07-14 22:13:47,390 - httpx - INFO - HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"

@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+file_agent/__init__.py
+file_agent/agent.py
+file_agent/ai_providers.py
+file_agent/cli.py
+file_agent/config.py
+file_agent/file_manager.py
+file_agent.egg-info/PKG-INFO
+file_agent.egg-info/SOURCES.txt
+file_agent.egg-info/dependency_links.txt
+file_agent.egg-info/entry_points.txt
+file_agent.egg-info/requires.txt
+file_agent.egg-info/top_level.txt
+tests/test_config.py
+tests/test_file_manager.py

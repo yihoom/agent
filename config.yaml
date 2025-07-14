@@ -1,0 +1,38 @@
+# File Agent 配置文件示例
+
+# AI 配置
+ai:
+  # 默认AI提供商 (openai, anthropic, google, deepseek)
+  default_provider: openai
+  
+  # 默认模型
+  default_model: gpt-3.5-turbo
+  
+  # 生成参数
+  max_tokens: 1000
+  temperature: 0.7
+
+# 文件管理配置
+file_manager:
+  # 默认工作目录
+  default_workspace: ./workspace
+  
+  # 最大文件大小 (MB)
+  max_file_size_mb: 10
+  
+  # 是否启用备份
+  backup_enabled: true
+  
+  # 备份目录
+  backup_dir: ./backups
+
+# 日志配置
+logging:
+  # 日志级别 (DEBUG, INFO, WARNING, ERROR)
+  level: INFO
+  
+  # 日志文件路径
+  file: ./logs/agent.log
+  
+  # 日志格式
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
